@@ -5,11 +5,11 @@ export default function Toolbar() {
 
   return (
     <header className="flex w-full items-center justify-between bg-[var(--toolbar-bg)] px-4 py-3 sm:px-8">
-      <Link href="/" className="text-lg font-semibold tracking-wide text-white hover:opacity-80 transition-opacity">
+      <Link href="/" className="text-lg font-semibold tracking-wide text-gray-800 hover:opacity-80 transition-opacity">
         Zara Mobiles
       </Link>
 
-      <Link href="/" className="relative text-white hover:opacity-80 transition-opacity">
+      <Link href="/" className="relative text-gray-800 hover:opacity-80 transition-opacity">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -25,7 +25,7 @@ export default function Toolbar() {
           />
         </svg>
 
-        <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[10px] font-bold text-[var(--toolbar-bg)]">
+        <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-gray-800 text-[10px] font-bold text-white">
           {cartCount}
         </span>
       </Link>
