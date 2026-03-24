@@ -3,7 +3,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --toolbar-bg: #2596be;
+  --toolbar-bg: #75f0c7;
+  --toolbar-height: 52px;
+}
+
+@theme inline {
+  --color-primary: var(--toolbar-bg);
+  --spacing-toolbar: var(--toolbar-height);
 }
 
 body {
