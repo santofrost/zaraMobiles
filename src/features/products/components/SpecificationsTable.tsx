@@ -35,7 +35,7 @@ export default function SpecificationsTable({
   ];
 
   return (
-    <section className="px-4 py-12 sm:px-8">
+    <section className="pl-16 pr-4 py-12 sm:pl-24 sm:pr-8">
       <h3 className="text-xl font-semibold tracking-wide uppercase mb-8">
         Specifications
       </h3>

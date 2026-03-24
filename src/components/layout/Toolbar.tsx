@@ -4,7 +4,7 @@ export default function Toolbar() {
   const cartCount = 0;
 
   return (
-    <header className="flex w-full items-center justify-between bg-[var(--toolbar-bg)] px-4 py-3 sm:px-8">
+    <header className="sticky top-0 z-50 flex h-toolbar w-full items-center justify-between bg-[var(--toolbar-bg)] px-4 sm:px-8">
       <Link href="/" className="text-lg font-semibold tracking-wide text-gray-800 hover:opacity-80 transition-opacity">
         Zara Mobiles
       </Link>

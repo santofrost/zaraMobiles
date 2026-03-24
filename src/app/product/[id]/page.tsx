@@ -37,7 +37,7 @@ export default function ProductDetailPage() {
     <div className="min-h-screen bg-white">
       <BackButton />
 
-      <section className="flex flex-col pt-12 px-4 sm:px-8 lg:flex-row lg:gap-16 lg:pt-16">
+      <section className="flex flex-col pt-4 pl-16 pr-4 sm:pl-24 sm:pr-8 lg:flex-row lg:gap-16 lg:pt-8">
         <div className="flex items-center justify-center lg:w-1/2">
           <div className="relative w-full max-w-md aspect-square">
             <Image
