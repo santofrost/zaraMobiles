@@ -49,3 +49,15 @@ export interface ProductDetail {
   storageOptions: StorageOption[];
   similarProducts: SimilarProduct[];
 }
+
+export interface CartItem {
+  cartId: string;
+  productId: string;
+  brand: string;
+  name: string;
+  imageUrl: string;
+  storage: string;
+  color: string;
+  price: number;
+  quantity: number;
+}

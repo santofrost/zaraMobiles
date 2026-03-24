@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Toolbar from "@/components/layout/Toolbar";
+import ClientLayout from "@/components/layout/ClientLayout";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,8 +15,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body>
-        <Toolbar />
-        {children}
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
