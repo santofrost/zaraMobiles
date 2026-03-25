@@ -6,6 +6,7 @@ import {
     useState,
     useCallback,
     useMemo,
+    useEffect,
     ReactNode,
 } from "react";
 import { CartItem } from "@/features/products/types";
@@ -23,6 +24,25 @@ const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
     const [items, setItems] = useState<CartItem[]>([]);
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+        try {
+            const storedCart = localStorage.getItem("mobileStore_cart");
+            if (storedCart) {
+                setItems(JSON.parse(storedCart));
+            }
+        } catch (error) {
+            console.error("Failed to load cart from local storage", error);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (isMounted) {
+            localStorage.setItem("mobileStore_cart", JSON.stringify(items));
+        }
+    }, [items, isMounted]);
 
     const addItem = useCallback(
         (newItem: Omit<CartItem, "cartId" | "quantity">) => {
