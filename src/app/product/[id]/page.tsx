@@ -125,6 +125,7 @@ export default function ProductDetailPage() {
                 color: product.colorOptions[selectedColor].name,
                 price: product.storageOptions[selectedStorage].price,
               });
+              setSelectedStorage(null);
             }}
             className={`w-full py-4 text-xs font-medium tracking-widest uppercase transition-colors ${isAddEnabled
               ? "bg-black text-white hover:bg-gray-800 cursor-pointer"
