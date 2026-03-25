@@ -43,4 +43,20 @@ describe('LanguageContext', () => {
         // Debe persistir en localStorage
         expect(localStorage.getItem('language')).toBe('en');
     });
+
+    it('loads language from localStorage on mount', () => {
+        localStorage.setItem('language', 'en');
+        render(
+            <LanguageProvider>
+                <TestComponent />
+            </LanguageProvider>
+        );
+        expect(screen.getByTestId('lang')).toHaveTextContent('en');
+    });
+
+    it('throws error if useLanguage is used outside LanguageProvider', () => {
+        const consoleError = jest.spyOn(console, 'error').mockImplementation(() => { });
+        expect(() => render(<TestComponent />)).toThrow('useLanguage must be used within a LanguageProvider');
+        consoleError.mockRestore();
+    });
 });
