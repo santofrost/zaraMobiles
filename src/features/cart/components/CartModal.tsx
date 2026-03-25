@@ -31,7 +31,12 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                     <>
                         <div className="max-h-80 overflow-y-auto divide-y divide-gray-100">
                             {items.map((item) => (
-                                <div key={item.cartId} className="flex gap-3 p-4">
+                                <Link
+                                    href={`/product/${item.productId}`}
+                                    onClick={onClose}
+                                    key={item.cartId}
+                                    className="flex gap-3 p-4 hover:bg-gray-50 transition-colors"
+                                >
                                     <div className="relative h-16 w-16 shrink-0">
                                         <Image
                                             src={item.imageUrl}
@@ -56,7 +61,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                                             </span>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </div>
 

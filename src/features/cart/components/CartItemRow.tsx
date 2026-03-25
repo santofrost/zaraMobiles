@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { CartItem as CartItemType } from "@/features/products/types";
 import { formatPrice } from "@/utils/formatPrice";
 
@@ -13,14 +14,14 @@ interface CartItemRowProps {
 export default function CartItemRow({ item, onRemove, onUpdateQuantity }: CartItemRowProps) {
     return (
         <div className="flex gap-6 py-8 border-b border-gray-100">
-            <div className="relative h-48 w-40 shrink-0">
+            <Link href={`/product/${item.productId}`} className="relative h-48 w-40 shrink-0 block hover:opacity-80 transition-opacity">
                 <Image
                     src={item.imageUrl}
                     alt={`${item.brand} ${item.name}`}
                     fill
                     className="object-contain"
                 />
-            </div>
+            </Link>
 
             <div className="flex flex-col justify-between flex-1 py-2">
                 <div>
