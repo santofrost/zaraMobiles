@@ -5,10 +5,15 @@ import CartItemRow from "@/features/cart/components/CartItemRow";
 import { formatPrice } from "@/utils/formatPrice";
 import Link from "next/link";
 import { useLanguage } from "@/features/i18n/LanguageContext";
+import { useEffect } from "react";
 
 export default function CartPage() {
     const { items, itemCount, removeItem, updateQuantity, total } = useCart();
     const { t } = useLanguage();
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <div className="min-h-screen bg-white px-4 py-8 sm:px-8">
