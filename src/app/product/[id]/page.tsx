@@ -125,7 +125,7 @@ export default function ProductDetailPage() {
               });
             }}
             className={`w-full py-4 text-xs font-medium tracking-widest uppercase transition-colors ${isAddEnabled
-              ? "bg-primary text-gray-800 hover:bg-primary/80 cursor-pointer"
+              ? "bg-black text-white hover:bg-gray-800 cursor-pointer"
               : "bg-gray-100 text-gray-300 cursor-not-allowed"
               }`}
           >

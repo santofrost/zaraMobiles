@@ -72,7 +72,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                             <Link
                                 href="/cart"
                                 onClick={onClose}
-                                className="block w-full py-3 text-center text-xs font-medium tracking-widest text-gray-800 uppercase bg-primary transition-colors hover:bg-primary/80"
+                                className="block w-full py-4 text-center text-xs font-medium tracking-widest text-white uppercase bg-black hover:bg-gray-800 transition-colors"
                             >
                                 Ver carrito
                             </Link>
