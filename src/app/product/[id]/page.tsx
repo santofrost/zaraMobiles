@@ -8,12 +8,15 @@ import ColorSelector from "@/features/products/components/ColorSelector";
 import SpecificationsTable from "@/features/products/components/SpecificationsTable";
 import SimilarProducts from "@/features/products/components/SimilarProducts";
 import { mockProductDetail } from "@/features/products/data/mockProductDetail";
+import { useCart } from "@/features/cart/context/CartContext";
+import { formatPrice } from "@/utils/formatPrice";
 
 export default function ProductDetailPage() {
   const product = mockProductDetail;
 
   const [selectedStorage, setSelectedStorage] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<number | null>(null);
+  const { addItem } = useCart();
 
   const isAddEnabled = selectedStorage !== null && selectedColor !== null;
 
@@ -56,7 +59,7 @@ export default function ProductDetailPage() {
               {product.name}
             </h1>
             <p className="mt-1 text-base text-gray-600">
-              From {currentPrice} EUR
+              From {formatPrice(currentPrice)}
             </p>
           </div>
 
@@ -75,11 +78,22 @@ export default function ProductDetailPage() {
           <button
             id="add-to-cart-button"
             disabled={!isAddEnabled}
-            className={`w-full py-4 text-xs font-medium tracking-widest uppercase transition-colors ${
-              isAddEnabled
-                ? "bg-primary text-gray-800 hover:bg-primary/80 cursor-pointer"
-                : "bg-gray-100 text-gray-300 cursor-not-allowed"
-            }`}
+            onClick={() => {
+              if (selectedStorage === null || selectedColor === null) return;
+              addItem({
+                productId: product.id,
+                brand: product.brand,
+                name: product.name,
+                imageUrl: product.colorOptions[selectedColor].imageUrl,
+                storage: product.storageOptions[selectedStorage].capacity,
+                color: product.colorOptions[selectedColor].name,
+                price: product.storageOptions[selectedStorage].price,
+              });
+            }}
+            className={`w-full py-4 text-xs font-medium tracking-widest uppercase transition-colors ${isAddEnabled
+              ? "bg-primary text-gray-800 hover:bg-primary/80 cursor-pointer"
+              : "bg-gray-100 text-gray-300 cursor-not-allowed"
+              }`}
           >
             Añadir
           </button>
