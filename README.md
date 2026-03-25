@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Mobile Store 📱
 
-## Getting Started
+Mobile Store es una plataforma de comercio electrónico minimalista, construida con React y Next.js, diseñada como prueba técnica para Inditex.
 
-First, run the development server:
+## 1. Instrucciones de Instalación y Ejecución
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Para montar y hacer funcionar la aplicación en tu entorno local, sigue estos pasos:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Clona el repositorio** (si aún no lo has hecho):
+   ```bash
+   git clone <url-del-repositorio>
+   cd zaraMobiles
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Instala las dependencias:**
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+3. **Inicia el servidor de desarrollo:**
+   ```bash
+   npm run dev
+   ```
 
-## Learn More
+4. **Visualiza la app:** Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la página principal.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 2. Arquitectura y Estructura del Proyecto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+El proyecto sigue una arquitectura predecible y modular basada en **Feature Sliced Design** (organizado por funcionalidades) e integrada totalmente sobre el **App Router** de Next.js:
 
-## Deploy on Vercel
+- `/src/app/`: Define el sistema principal de rutas de la aplicación (`/`, `/cart`, `/product/[id]`). Tiene la composición base del DOM e inyecta los `Providers` de la aplicación.
+- `/src/features/`: Los módulos de negocio separados entre sí:
+  - `cart/`: Contiene el estado global de la compra (`CartContext.tsx`), lógica de persistencia y componentes del UI asociados (`CartModal`, componentes fila).
+  - `products/`: Interfaces y lógica de UI puramente para productos (`ProductList`, `SearchBar`, cuadros de especificaciones). Además gestiona el contacto asíncrono con el Endpoint (`useProducts`, `useProduct`).
+  - `i18n/`: Implementación propia de multi-idioma. Incluye su diccionario tipado con `NestedKeyOf` (`translations.ts`) y su motor de inyección React (`LanguageContext.tsx`).
+- `/src/components/`: Componentes que nada tienen que ver con las features (elementos de interfaz genéricos).
+- `/src/utils/`: Funciones `helper` universales o transversales.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+La UI de frontend está desconectada de los *Datos Duros* gracias al ecosistema de **hooks y context**, evitando el prop driling y facilitando expansiones.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 3. Librerías Externas
+
+Actualmente el ecosistema base descansa sobre estas principales herramientas extra:
+
+* **[Tailwind CSS v4](https://tailwindcss.com/):** Librería de estilos para agilizar el maquetado *responsive*.
+* **[TanStack React Query v5](https://tanstack.com/query/latest):** Gestor de toda la lógica de la API.
+* **[Axios](https://axios-http.com/):** Cliente HTTP para consultas directas y legibles por promesas.
+
+---
+
+## 4. Listado de Tareas (Roadmap)
+
+Gestión completa del desarrollo de nuestra aplicación:
+
+- [x] Crear proyecto
+- [ ] Configurar linter y formatter
+- [x] Configuración de peticiones externas API
+- [x] Configurar diseño global
+- [x] Maquetar pantalla de listado
+- [x] Maquetar pantalla de detalle
+- [x] Maquetar pantalla de carrito
+- [x] Almacenar carrito en React Context
+- [x] Almacenar carrito en almacenamiento local
+- [ ] Creación de modos
+- [ ] Servir assets dependiendo del modo
+- [x] Trabajar con datos de API
+- [ ] Testing
+- [ ] Accesibilidad
