@@ -1,18 +1,26 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import BackButton from "@/components/ui/BackButton";
 import StorageSelector from "@/features/products/components/StorageSelector";
 import ColorSelector from "@/features/products/components/ColorSelector";
 import SpecificationsTable from "@/features/products/components/SpecificationsTable";
 import SimilarProducts from "@/features/products/components/SimilarProducts";
-import { mockProductDetail } from "@/features/products/data/mockProductDetail";
 import { useCart } from "@/features/cart/context/CartContext";
 import { formatPrice } from "@/utils/formatPrice";
+import { useParams } from "next/navigation";
+import { useProduct } from "@/hooks/useProduct";
 
 export default function ProductDetailPage() {
-  const product = mockProductDetail;
+  const params = useParams();
+  const id = params.id as string;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  const { data: product, isLoading, error } = useProduct(id);
 
   const [selectedStorage, setSelectedStorage] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<number | null>(null);
@@ -21,20 +29,46 @@ export default function ProductDetailPage() {
   const isAddEnabled = selectedStorage !== null && selectedColor !== null;
 
   const currentPrice = useMemo(
-    () =>
-      selectedStorage !== null
+    () => {
+      if (!product) return 0;
+      return selectedStorage !== null
         ? product.storageOptions[selectedStorage].price
-        : product.basePrice,
+        : product.basePrice;
+    },
     [product, selectedStorage]
   );
 
   const currentImage = useMemo(
-    () =>
-      selectedColor !== null
+    () => {
+      if (!product) return "";
+      return selectedColor !== null
         ? product.colorOptions[selectedColor].imageUrl
-        : product.colorOptions[0].imageUrl,
+        : product.colorOptions[0].imageUrl;
+    },
     [product, selectedColor]
   );
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <BackButton />
+        <div className="flex h-[60vh] items-center justify-center">
+          <span className="text-sm tracking-widest text-gray-400 uppercase">Cargando detalles...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error || !product) {
+    return (
+      <div className="min-h-screen bg-white">
+        <BackButton />
+        <div className="flex h-[60vh] items-center justify-center">
+          <span className="text-sm tracking-widest text-red-400 uppercase">Error al cargar producto</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">

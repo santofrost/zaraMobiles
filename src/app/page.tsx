@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import SearchBar from "@/features/products/components/SearchBar";
 import ProductList from "@/features/products/components/ProductList";
 import { useProducts } from "@/hooks/useProducts";
@@ -22,20 +22,6 @@ export default function Home() {
   }, []);
 
   const { data: products = [], isLoading, error } = useProducts(debouncedSearch);
-
-  const filteredProducts = useMemo(() => {
-    // Deduplicate by ID
-    const uniqueIds = new Set();
-    const uniqueProducts = products.filter((product: any) => {
-      if (!uniqueIds.has(product.id)) {
-        uniqueIds.add(product.id);
-        return true;
-      }
-      return false;
-    });
-
-    return uniqueProducts;
-  }, [products]);
 
   if (isLoading) {
     return (
@@ -64,9 +50,9 @@ export default function Home() {
       <SearchBar
         value={searchQuery}
         onChange={handleSearch}
-        resultsCount={filteredProducts.length}
+        resultsCount={products.length}
       />
-      <ProductList products={filteredProducts} />
+      <ProductList products={products} />
     </main>
   );
 }
