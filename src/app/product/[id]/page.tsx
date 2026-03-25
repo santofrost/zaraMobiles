@@ -9,6 +9,7 @@ import SpecificationsTable from "@/features/products/components/SpecificationsTa
 import SimilarProducts from "@/features/products/components/SimilarProducts";
 import { mockProductDetail } from "@/features/products/data/mockProductDetail";
 import { useCart } from "@/features/cart/context/CartContext";
+import { formatPrice } from "@/utils/formatPrice";
 
 export default function ProductDetailPage() {
   const product = mockProductDetail;
@@ -58,7 +59,7 @@ export default function ProductDetailPage() {
               {product.name}
             </h1>
             <p className="mt-1 text-base text-gray-600">
-              From {currentPrice} EUR
+              From {formatPrice(currentPrice)}
             </p>
           </div>
 
@@ -90,8 +91,8 @@ export default function ProductDetailPage() {
               });
             }}
             className={`w-full py-4 text-xs font-medium tracking-widest uppercase transition-colors ${isAddEnabled
-                ? "bg-primary text-gray-800 hover:bg-primary/80 cursor-pointer"
-                : "bg-gray-100 text-gray-300 cursor-not-allowed"
+              ? "bg-primary text-gray-800 hover:bg-primary/80 cursor-pointer"
+              : "bg-gray-100 text-gray-300 cursor-not-allowed"
               }`}
           >
             Añadir

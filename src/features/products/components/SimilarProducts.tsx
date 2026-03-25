@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SimilarProduct } from "../types";
+import { formatPrice } from "@/utils/formatPrice";
 
 interface SimilarProductsProps {
   products: SimilarProduct[];
@@ -40,7 +41,7 @@ export default function SimilarProducts({ products }: SimilarProductsProps) {
                 </h4>
               </div>
               <span className="shrink-0 text-xs font-medium text-gray-500 sm:text-sm transition-colors duration-700 group-hover:text-white">
-                {product.basePrice} EUR
+                {formatPrice(product.basePrice)}
               </span>
             </div>
 

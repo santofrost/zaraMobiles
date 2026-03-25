@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/features/cart/context/CartContext";
+import { formatPrice } from "@/utils/formatPrice";
 
 interface CartModalProps {
     isOpen: boolean;
@@ -46,12 +47,14 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                                         <p className="text-[10px] text-gray-400">
                                             {item.storage} | {item.color}
                                         </p>
-                                        <p className="text-[10px] text-gray-400">
-                                            Cant: {item.quantity}
-                                        </p>
-                                        <p className="mt-1 text-xs font-medium text-gray-700">
-                                            {item.price * item.quantity} EUR
-                                        </p>
+                                        <div className="flex items-center justify-between mt-2">
+                                            <span className="text-sm font-bold text-gray-900">
+                                                x{item.quantity}
+                                            </span>
+                                            <span className="text-xs font-medium text-gray-700">
+                                                {formatPrice(item.price * item.quantity)}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
@@ -63,7 +66,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                                     Total ({itemCount} {itemCount === 1 ? "item" : "items"})
                                 </span>
                                 <span className="text-sm font-semibold text-gray-900">
-                                    {total} EUR
+                                    {formatPrice(total)}
                                 </span>
                             </div>
                             <Link
