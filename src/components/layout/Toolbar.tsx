@@ -10,6 +10,7 @@ export default function Toolbar() {
   const { itemCount } = useCart();
   const { language, setLanguage } = useLanguage();
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 flex h-toolbar w-full items-center justify-between bg-[var(--toolbar-bg)] px-4 sm:px-8">
@@ -18,26 +19,44 @@ export default function Toolbar() {
       </Link>
 
       <div className="flex items-center gap-6">
-        <div className="relative group flex items-center">
-          <button className="flex items-center gap-1 text-2xl hover:opacity-80 transition-opacity cursor-pointer">
+        <div className="relative flex items-center">
+          <button
+            onClick={() => setIsLangOpen(!isLangOpen)}
+            className="flex items-center gap-1 text-2xl hover:opacity-80 transition-opacity cursor-pointer"
+          >
             {language === "es" ? "🇪🇸" : "🇺🇸"}
           </button>
-          <div className="absolute right-0 top-full pt-2 hidden group-hover:block w-24">
-            <div className="flex flex-col bg-white border border-gray-100 shadow-xl rounded overflow-hidden">
-              <button
-                onClick={() => setLanguage("es")}
-                className={`flex items-center gap-2 px-4 py-3 text-sm hover:bg-gray-50 transition-colors ${language === 'es' ? 'bg-gray-50 font-bold' : ''}`}
-              >
-                🇪🇸 ES
-              </button>
-              <button
-                onClick={() => setLanguage("en")}
-                className={`flex items-center gap-2 px-4 py-3 text-sm hover:bg-gray-50 transition-colors ${language === 'en' ? 'bg-gray-50 font-bold' : ''}`}
-              >
-                🇺🇸 EN
-              </button>
-            </div>
-          </div>
+
+          {isLangOpen && (
+            <>
+              <div
+                className="fixed inset-0 z-40"
+                onClick={() => setIsLangOpen(false)}
+              />
+              <div className="absolute right-0 top-full pt-2 w-24 z-50">
+                <div className="flex flex-col bg-white border border-gray-100 shadow-xl rounded overflow-hidden">
+                  <button
+                    onClick={() => {
+                      setLanguage("es");
+                      setIsLangOpen(false);
+                    }}
+                    className={`flex items-center gap-2 px-4 py-3 text-sm hover:bg-gray-50 transition-colors ${language === 'es' ? 'bg-gray-50 font-bold' : ''}`}
+                  >
+                    🇪🇸 ES
+                  </button>
+                  <button
+                    onClick={() => {
+                      setLanguage("en");
+                      setIsLangOpen(false);
+                    }}
+                    className={`flex items-center gap-2 px-4 py-3 text-sm hover:bg-gray-50 transition-colors ${language === 'en' ? 'bg-gray-50 font-bold' : ''}`}
+                  >
+                    🇺🇸 EN
+                  </button>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="relative">
