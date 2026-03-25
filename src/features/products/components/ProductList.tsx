@@ -1,15 +1,18 @@
 import { Product } from "../types";
 import ProductCard from "./ProductCard";
+import { useLanguage } from "@/features/i18n/LanguageContext";
 
 interface ProductListProps {
   products: Product[];
 }
 
 export default function ProductList({ products }: ProductListProps) {
+  const { t } = useLanguage();
+
   if (products.length === 0) {
     return (
       <div className="flex items-center justify-center py-20 px-4">
-        <p className="text-sm text-gray-400">No products found.</p>
+        <p className="text-sm text-gray-400">{t("list.empty")}</p>
       </div>
     );
   }

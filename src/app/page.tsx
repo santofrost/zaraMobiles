@@ -4,10 +4,12 @@ import { useState, useCallback, useEffect } from "react";
 import SearchBar from "@/features/products/components/SearchBar";
 import ProductList from "@/features/products/components/ProductList";
 import { useProducts } from "@/hooks/useProducts";
+import { useLanguage } from "@/features/i18n/LanguageContext";
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handler = setTimeout(() => {
@@ -28,7 +30,7 @@ export default function Home() {
       <main className="min-h-screen bg-white">
         <SearchBar value={searchQuery} onChange={handleSearch} resultsCount={0} />
         <div className="flex justify-center items-center py-20">
-          <span className="text-gray-400 text-sm tracking-widest uppercase">Loading products...</span>
+          <span className="text-gray-400 text-sm tracking-widest uppercase">{t("list.loading")}</span>
         </div>
       </main>
     );
@@ -39,7 +41,7 @@ export default function Home() {
       <main className="min-h-screen bg-white">
         <SearchBar value={searchQuery} onChange={handleSearch} resultsCount={0} />
         <div className="flex justify-center items-center py-20">
-          <span className="text-red-400 text-sm tracking-widest uppercase">Error loading products</span>
+          <span className="text-red-400 text-sm tracking-widest uppercase">{t("list.error")}</span>
         </div>
       </main>
     );

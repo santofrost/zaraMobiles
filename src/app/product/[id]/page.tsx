@@ -11,6 +11,7 @@ import { useCart } from "@/features/cart/context/CartContext";
 import { formatPrice } from "@/utils/formatPrice";
 import { useParams } from "next/navigation";
 import { useProduct } from "@/hooks/useProduct";
+import { useLanguage } from "@/features/i18n/LanguageContext";
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -21,6 +22,7 @@ export default function ProductDetailPage() {
   }, [id]);
 
   const { data: product, isLoading, error } = useProduct(id);
+  const { t } = useLanguage();
 
   const [selectedStorage, setSelectedStorage] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<number | null>(null);
@@ -53,7 +55,7 @@ export default function ProductDetailPage() {
       <div className="min-h-screen bg-white">
         <BackButton />
         <div className="flex h-[60vh] items-center justify-center">
-          <span className="text-sm tracking-widest text-gray-400 uppercase">Cargando detalles...</span>
+          <span className="text-sm tracking-widest text-gray-400 uppercase">{t("detail.loading_details")}</span>
         </div>
       </div>
     );
@@ -64,7 +66,7 @@ export default function ProductDetailPage() {
       <div className="min-h-screen bg-white">
         <BackButton />
         <div className="flex h-[60vh] items-center justify-center">
-          <span className="text-sm tracking-widest text-red-400 uppercase">Error al cargar producto</span>
+          <span className="text-sm tracking-widest text-red-400 uppercase">{t("detail.error")}</span>
         </div>
       </div>
     );
@@ -93,7 +95,7 @@ export default function ProductDetailPage() {
               {product.name}
             </h1>
             <p className="mt-1 text-base text-gray-600">
-              From {formatPrice(currentPrice)}
+              {t("detail.from")} {formatPrice(currentPrice)}
             </p>
           </div>
 
@@ -125,11 +127,11 @@ export default function ProductDetailPage() {
               });
             }}
             className={`w-full py-4 text-xs font-medium tracking-widest uppercase transition-colors ${isAddEnabled
-              ? "bg-primary text-gray-800 hover:bg-primary/80 cursor-pointer"
+              ? "bg-black text-white hover:bg-gray-800 cursor-pointer"
               : "bg-gray-100 text-gray-300 cursor-not-allowed"
               }`}
           >
-            Añadir
+            {t("detail.add")}
           </button>
         </div>
       </section>

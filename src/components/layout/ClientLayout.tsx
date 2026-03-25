@@ -3,6 +3,7 @@
 import { CartProvider } from "@/features/cart/context/CartContext";
 import Toolbar from "@/components/layout/Toolbar";
 import QueryProvider from "@/providers/QueryProvider";
+import { LanguageProvider } from "@/features/i18n/LanguageContext";
 
 export default function ClientLayout({
     children,
@@ -11,10 +12,12 @@ export default function ClientLayout({
 }) {
     return (
         <QueryProvider>
-            <CartProvider>
-                <Toolbar />
-                {children}
-            </CartProvider>
+            <LanguageProvider>
+                <CartProvider>
+                    <Toolbar />
+                    {children}
+                </CartProvider>
+            </LanguageProvider>
         </QueryProvider>
     );
 }
