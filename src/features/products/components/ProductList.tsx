@@ -16,8 +16,8 @@ export default function ProductList({ products }: ProductListProps) {
 
   return (
     <div className="grid grid-cols-1 px-4 pb-8 sm:grid-cols-2 sm:px-8 lg:grid-cols-5">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+      {products.map((product, index) => (
+        <ProductCard key={`${product.id}-${index}`} product={product} />
       ))}
     </div>
   );
