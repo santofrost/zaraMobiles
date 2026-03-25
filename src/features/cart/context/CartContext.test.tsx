@@ -156,4 +156,28 @@ describe('CartContext', () => {
         // Count should be (1+1) + 1 = 3
         expect(screen.getByTestId('count')).toHaveTextContent('3');
     });
+
+    it('leaves other items untouched when updating quantity of a specific item', () => {
+        // Setup initial cart with two different items
+        const mockCart = [
+            { cartId: '1-128GB-Black', productId: '1', brand: 'Brand', name: 'Name', price: 100, imageUrl: '', storage: '128GB', color: 'Black', quantity: 1 },
+            { cartId: '2-256GB-White', productId: '2', brand: 'Brand', name: 'Name', price: 200, imageUrl: '', storage: '256GB', color: 'White', quantity: 1 }
+        ];
+        localStorage.setItem("mobileStore_cart", JSON.stringify(mockCart));
+
+        render(
+            <CartProvider>
+                <TestComponent />
+            </CartProvider>
+        );
+
+        act(() => {
+            // Update updates '1-128GB-Black' to 2.
+            screen.getByText('Update').click();
+        });
+
+        // The second item should remain intact inside prev.map, thus entering the `false` boundary of the ternary.
+        // Final count: 2 (from first item) + 1 (from second item) = 3
+        expect(screen.getByTestId('count')).toHaveTextContent('3');
+    });
 });

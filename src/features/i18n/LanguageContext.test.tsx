@@ -7,6 +7,7 @@ const TestComponent = () => {
         <div>
             <span data-testid="lang">{language}</span>
             <span data-testid="translation">{t('cart.empty' as any)}</span>
+            <span data-testid="missing-translation">{t('non.existent.key' as any)}</span>
             <button onClick={() => setLanguage('en')}>Set EN</button>
         </div>
     );
@@ -17,7 +18,7 @@ describe('LanguageContext', () => {
         localStorage.clear();
     });
 
-    it('provides default spanish translation', () => {
+    it('provides default spanish translation and fallbacks for missing keys', () => {
         render(
             <LanguageProvider>
                 <TestComponent />
@@ -25,6 +26,7 @@ describe('LanguageContext', () => {
         );
         expect(screen.getByTestId('lang')).toHaveTextContent('es');
         expect(screen.getByTestId('translation')).toHaveTextContent('Tu carrito está vacío');
+        expect(screen.getByTestId('missing-translation')).toHaveTextContent('non.existent.key');
     });
 
     it('allows language change to english', () => {

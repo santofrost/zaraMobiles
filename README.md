@@ -68,5 +68,5 @@ Gestión completa del desarrollo de nuestra aplicación:
 - [ ] Creación de modos
 - [ ] Servir assets dependiendo del modo
 - [x] Trabajar con datos de API
-- [ ] Testing
+- [x] Testing
 - [ ] Accesibilidad
