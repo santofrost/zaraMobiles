@@ -2,6 +2,7 @@
 
 import { CartProvider } from "@/features/cart/context/CartContext";
 import Toolbar from "@/components/layout/Toolbar";
+import QueryProvider from "@/providers/QueryProvider";
 
 export default function ClientLayout({
     children,
@@ -9,9 +10,11 @@ export default function ClientLayout({
     children: React.ReactNode;
 }) {
     return (
-        <CartProvider>
-            <Toolbar />
-            {children}
-        </CartProvider>
+        <QueryProvider>
+            <CartProvider>
+                <Toolbar />
+                {children}
+            </CartProvider>
+        </QueryProvider>
     );
 }

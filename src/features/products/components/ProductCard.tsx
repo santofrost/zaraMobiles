@@ -34,7 +34,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             </h2>
           </div>
           <span className="shrink-0 text-xs font-medium text-gray-500 sm:text-sm transition-colors duration-700 group-hover:text-white">
-            {formatPrice(product.price)}
+            {formatPrice(product.basePrice ?? product.price ?? 0)}
           </span>
         </div>
 

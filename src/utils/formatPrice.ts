@@ -1,8 +1,9 @@
 export function formatPrice(price: number): string {
-    return (
-        price.toLocaleString("es-ES", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        }) + " €"
-    );
+    return new Intl.NumberFormat("es-ES", {
+        style: "currency",
+        currency: "EUR",
+        useGrouping: true,
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    }).format(price);
 }
