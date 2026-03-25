@@ -1,4 +1,5 @@
 import { ProductSpecs } from "../types";
+import { useLanguage } from "@/features/i18n/LanguageContext";
 
 interface SpecificationsTableProps {
   brand: string;
@@ -27,6 +28,8 @@ export default function SpecificationsTable({
   description,
   specs,
 }: SpecificationsTableProps) {
+  const { t } = useLanguage();
+
   const rows = [
     { key: "brand", value: brand },
     { key: "name", value: name },
@@ -35,24 +38,26 @@ export default function SpecificationsTable({
   ];
 
   return (
-    <section className="pl-16 pr-4 py-12 sm:pl-24 sm:pr-8">
-      <h3 className="text-xl font-semibold tracking-wide uppercase mb-8">
-        Specifications
-      </h3>
-      <div className="border-t border-gray-200">
-        {rows.map((row) => (
-          <div
-            key={row.key}
-            className="flex flex-col gap-1 border-b border-gray-200 py-4 sm:flex-row sm:gap-8"
-          >
-            <span className="shrink-0 w-48 text-xs font-medium tracking-wider text-gray-900 uppercase">
-              {SPEC_LABELS[row.key] || row.key}
-            </span>
-            <span className="text-sm text-gray-600">
-              {row.value}
-            </span>
-          </div>
-        ))}
+    <section className="px-4 py-12 border-t border-gray-100 sm:px-8 mt-8">
+      <div className="max-w-7xl mx-auto">
+        <h2 className="mb-8 text-sm font-semibold tracking-widest text-gray-900 uppercase">
+          {t("detail.specifications")}
+        </h2>
+        <div className="border-t border-gray-200">
+          {rows.map((row) => (
+            <div
+              key={row.key}
+              className="flex flex-col gap-1 border-b border-gray-200 py-4 sm:flex-row sm:gap-8"
+            >
+              <span className="shrink-0 w-48 text-xs font-medium tracking-wider text-gray-900 uppercase">
+                {SPEC_LABELS[row.key] || row.key}
+              </span>
+              <span className="text-sm text-gray-600">
+                {row.value}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

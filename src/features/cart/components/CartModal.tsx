@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/features/cart/context/CartContext";
 import { formatPrice } from "@/utils/formatPrice";
+import { useLanguage } from "@/features/i18n/LanguageContext";
 
 interface CartModalProps {
     isOpen: boolean;
@@ -12,6 +13,7 @@ interface CartModalProps {
 
 export default function CartModal({ isOpen, onClose }: CartModalProps) {
     const { items, itemCount, total } = useCart();
+    const { t } = useLanguage();
 
     if (!isOpen) return null;
 
@@ -25,7 +27,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
             <div className="absolute right-0 top-full z-50 w-80 border border-gray-200 bg-white shadow-lg sm:w-96">
                 {items.length === 0 ? (
                     <div className="p-6 text-center">
-                        <p className="text-sm text-gray-400">Tu carrito está vacío</p>
+                        <p className="text-sm text-gray-400">{t("cart.empty")}</p>
                     </div>
                 ) : (
                     <>
@@ -68,7 +70,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                         <div className="border-t border-gray-200 p-4">
                             <div className="flex justify-between mb-3">
                                 <span className="text-xs font-medium text-gray-500 uppercase">
-                                    Total ({itemCount} {itemCount === 1 ? "item" : "items"})
+                                    {t("cart.total")} ({itemCount} {itemCount === 1 ? t("cart.item") : t("cart.items")})
                                 </span>
                                 <span className="text-sm font-semibold text-gray-900">
                                     {formatPrice(total)}
@@ -79,7 +81,7 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                                 onClick={onClose}
                                 className="block w-full py-4 text-center text-xs font-medium tracking-widest text-white uppercase bg-black hover:bg-gray-800 transition-colors"
                             >
-                                Ver carrito
+                                {t("cart.view")}
                             </Link>
                         </div>
                     </>
