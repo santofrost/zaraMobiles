@@ -11,7 +11,7 @@ export default function ProductList({ products }: ProductListProps) {
 
   if (products.length === 0) {
     return (
-      <div className="flex items-center justify-center py-20 px-4">
+      <div className="flex items-center justify-center px-4 py-20">
         <p className="text-sm text-gray-400">{t("list.empty")}</p>
       </div>
     );

@@ -30,32 +30,28 @@ export default function ProductDetailPage() {
 
   const isAddEnabled = selectedStorage !== null && selectedColor !== null;
 
-  const currentPrice = useMemo(
-    () => {
-      if (!product) return 0;
-      return selectedStorage !== null
-        ? product.storageOptions[selectedStorage].price
-        : product.basePrice;
-    },
-    [product, selectedStorage]
-  );
+  const currentPrice = useMemo(() => {
+    if (!product) return 0;
+    return selectedStorage !== null
+      ? product.storageOptions[selectedStorage].price
+      : product.basePrice;
+  }, [product, selectedStorage]);
 
-  const currentImage = useMemo(
-    () => {
-      if (!product) return "";
-      return selectedColor !== null
-        ? product.colorOptions[selectedColor].imageUrl
-        : product.colorOptions[0].imageUrl;
-    },
-    [product, selectedColor]
-  );
+  const currentImage = useMemo(() => {
+    if (!product) return "";
+    return selectedColor !== null
+      ? product.colorOptions[selectedColor].imageUrl
+      : product.colorOptions[0].imageUrl;
+  }, [product, selectedColor]);
 
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white">
         <BackButton />
         <div className="flex h-[60vh] items-center justify-center">
-          <span className="text-sm tracking-widest text-gray-400 uppercase">{t("detail.loading_details")}</span>
+          <span className="text-sm tracking-widest text-gray-400 uppercase">
+            {t("detail.loading_details")}
+          </span>
         </div>
       </div>
     );
@@ -66,7 +62,9 @@ export default function ProductDetailPage() {
       <div className="min-h-screen bg-white">
         <BackButton />
         <div className="flex h-[60vh] items-center justify-center">
-          <span className="text-sm tracking-widest text-red-400 uppercase">{t("detail.error")}</span>
+          <span className="text-sm tracking-widest text-red-400 uppercase">
+            {t("detail.error")}
+          </span>
         </div>
       </div>
     );
@@ -76,9 +74,9 @@ export default function ProductDetailPage() {
     <div className="min-h-screen bg-white">
       <BackButton />
 
-      <section className="flex flex-col pt-4 pl-16 pr-4 sm:pl-24 sm:pr-8 lg:flex-row lg:gap-16 lg:pt-8">
+      <section className="flex flex-col pt-4 pr-4 pl-16 sm:pr-8 sm:pl-24 lg:flex-row lg:gap-16 lg:pt-8">
         <div className="flex items-center justify-center lg:w-1/2">
-          <div className="relative w-full max-w-md aspect-square">
+          <div className="relative aspect-square w-full max-w-md">
             <Image
               src={currentImage}
               alt={`${product.brand} ${product.name}`}
@@ -127,10 +125,11 @@ export default function ProductDetailPage() {
               });
               setSelectedStorage(null);
             }}
-            className={`w-full py-4 text-xs font-medium tracking-widest uppercase transition-colors ${isAddEnabled
-              ? "bg-black text-white hover:bg-gray-800 cursor-pointer"
-              : "bg-gray-100 text-gray-300 cursor-not-allowed"
-              }`}
+            className={`w-full py-4 text-xs font-medium tracking-widest uppercase transition-colors ${
+              isAddEnabled
+                ? "cursor-pointer bg-black text-white hover:bg-gray-800"
+                : "cursor-not-allowed bg-gray-100 text-gray-300"
+            }`}
           >
             {t("detail.add")}
           </button>

@@ -29,8 +29,10 @@ export default function Home() {
     return (
       <main className="min-h-screen bg-white">
         <SearchBar value={searchQuery} onChange={handleSearch} resultsCount={0} />
-        <div className="flex justify-center items-center py-20">
-          <span className="text-gray-400 text-sm tracking-widest uppercase">{t("list.loading")}</span>
+        <div className="flex items-center justify-center py-20">
+          <span className="text-sm tracking-widest text-gray-400 uppercase">
+            {t("list.loading")}
+          </span>
         </div>
       </main>
     );
@@ -40,8 +42,8 @@ export default function Home() {
     return (
       <main className="min-h-screen bg-white">
         <SearchBar value={searchQuery} onChange={handleSearch} resultsCount={0} />
-        <div className="flex justify-center items-center py-20">
-          <span className="text-red-400 text-sm tracking-widest uppercase">{t("list.error")}</span>
+        <div className="flex items-center justify-center py-20">
+          <span className="text-sm tracking-widest text-red-400 uppercase">{t("list.error")}</span>
         </div>
       </main>
     );
@@ -49,11 +51,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-white">
-      <SearchBar
-        value={searchQuery}
-        onChange={handleSearch}
-        resultsCount={products.length}
-      />
+      <SearchBar value={searchQuery} onChange={handleSearch} resultsCount={products.length} />
       <ProductList products={products} />
     </main>
   );
