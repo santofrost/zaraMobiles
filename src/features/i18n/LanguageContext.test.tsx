@@ -1,13 +1,14 @@
 import { render, screen, act } from '@testing-library/react';
 import { LanguageProvider, useLanguage } from './LanguageContext';
+import { TranslationKey } from './translations';
 
 const TestComponent = () => {
     const { language, setLanguage, t } = useLanguage();
     return (
         <div>
             <span data-testid="lang">{language}</span>
-            <span data-testid="translation">{t('cart.empty' as any)}</span>
-            <span data-testid="missing-translation">{t('non.existent.key' as any)}</span>
+            <span data-testid="translation">{t('cart.empty' as unknown as TranslationKey)}</span>
+            <span data-testid="missing-translation">{t('non.existent.key' as unknown as TranslationKey)}</span>
             <button onClick={() => setLanguage('en')}>Set EN</button>
         </div>
     );

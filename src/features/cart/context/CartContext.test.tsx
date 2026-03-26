@@ -2,7 +2,7 @@ import { render, screen, act } from '@testing-library/react';
 import { CartProvider, useCart } from './CartContext';
 
 const TestComponent = () => {
-    const { items, itemCount, addItem, removeItem, updateQuantity } = useCart();
+    const { itemCount, addItem, removeItem, updateQuantity } = useCart();
     return (
         <div>
             <span data-testid="count">{itemCount}</span>

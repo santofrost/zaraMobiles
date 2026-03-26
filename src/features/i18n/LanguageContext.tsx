@@ -16,6 +16,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setIsMounted(true);
         const saved = localStorage.getItem('language') as Language;
         if (saved && (saved === 'es' || saved === 'en')) {
@@ -29,6 +30,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     };
 
     const t = (key: TranslationKey): string => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const resolvePath = (obj: any, path: string) => {
             return path.split('.').reduce((acc, part) => acc && acc[part], obj);
         };
