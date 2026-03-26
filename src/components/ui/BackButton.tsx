@@ -8,12 +8,12 @@ export default function BackButton() {
   const { t } = useLanguage();
 
   return (
-    <div className="sticky top-toolbar z-40 bg-white py-3 pl-4 sm:pl-8">
+    <div className="top-toolbar sticky z-40 bg-white py-3 pl-4 sm:pl-8">
       <button
         id="back-button"
         onClick={() => router.back()}
         aria-label={t("detail.back")}
-        className="flex items-center gap-1 text-xs font-medium tracking-wider text-gray-900 uppercase hover:text-gray-600 transition-colors"
+        className="flex items-center gap-1 text-xs font-medium tracking-wider text-gray-900 uppercase transition-colors hover:text-gray-600"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

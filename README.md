@@ -7,17 +7,20 @@ Mobile Store es una plataforma de comercio electrónico minimalista, construida 
 Para montar y hacer funcionar la aplicación en tu entorno local, sigue estos pasos:
 
 1. **Clona el repositorio** (si aún no lo has hecho):
+
    ```bash
    git clone <url-del-repositorio>
    cd zaraMobiles
    ```
 
 2. **Instala las dependencias:**
+
    ```bash
    npm install
    ```
 
 3. **Inicia el servidor de desarrollo:**
+
    ```bash
    npm run dev
    ```
@@ -38,7 +41,7 @@ El proyecto sigue una arquitectura predecible y modular basada en **Feature Slic
 - `/src/components/`: Componentes que nada tienen que ver con las features (elementos de interfaz genéricos).
 - `/src/utils/`: Funciones `helper` universales o transversales.
 
-La UI de frontend está desconectada de los *Datos Duros* gracias al ecosistema de **hooks y context**, evitando el prop driling y facilitando expansiones.
+La UI de frontend está desconectada de los _Datos Duros_ gracias al ecosistema de **hooks y context**, evitando el prop driling y facilitando expansiones.
 
 ---
 
@@ -46,9 +49,9 @@ La UI de frontend está desconectada de los *Datos Duros* gracias al ecosistema 
 
 Actualmente el ecosistema base descansa sobre estas principales herramientas extra:
 
-* **[Tailwind CSS v4](https://tailwindcss.com/):** Librería de estilos para agilizar el maquetado *responsive*.
-* **[TanStack React Query v5](https://tanstack.com/query/latest):** Gestor de toda la lógica de la API.
-* **[Axios](https://axios-http.com/):** Cliente HTTP para consultas directas y legibles por promesas.
+- **[Tailwind CSS v4](https://tailwindcss.com/):** Librería de estilos para agilizar el maquetado _responsive_.
+- **[TanStack React Query v5](https://tanstack.com/query/latest):** Gestor de toda la lógica de la API.
+- **[Axios](https://axios-http.com/):** Cliente HTTP para consultas directas y legibles por promesas.
 
 ---
 
@@ -57,7 +60,7 @@ Actualmente el ecosistema base descansa sobre estas principales herramientas ext
 Gestión completa del desarrollo de nuestra aplicación:
 
 - [x] Crear proyecto
-- [ ] Configurar linter y formatter
+- [x] Configurar linter y formatter
 - [x] Configuración de peticiones externas API
 - [x] Configurar diseño global
 - [x] Maquetar pantalla de listado

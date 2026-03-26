@@ -14,8 +14,8 @@ export default function SimilarProducts({ products }: SimilarProductsProps) {
   if (!products || products.length === 0) return null;
 
   return (
-    <section className="px-4 py-12 border-t border-gray-100 sm:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section className="border-t border-gray-100 px-4 py-12 sm:px-8">
+      <div className="mx-auto max-w-7xl">
         <h2 className="mb-8 text-sm font-semibold tracking-widest text-gray-900 uppercase">
           {t("detail.similar")}
         </h2>
@@ -24,32 +24,32 @@ export default function SimilarProducts({ products }: SimilarProductsProps) {
             <Link
               key={product.id}
               href={`/product/${product.id}`}
-              className="group shrink-0 w-60 relative flex flex-col border border-gray-200 bg-white overflow-hidden cursor-pointer sm:w-72"
+              className="group relative flex w-60 shrink-0 cursor-pointer flex-col overflow-hidden border border-gray-200 bg-white sm:w-72"
             >
-              <div className="relative flex items-center justify-center aspect-square overflow-hidden p-4 z-10">
+              <div className="relative z-10 flex aspect-square items-center justify-center overflow-hidden p-4">
                 <Image
                   src={product.imageUrl}
                   alt={`${product.brand} ${product.name}`}
                   width={200}
                   height={200}
-                  className="object-contain max-h-full w-auto"
+                  className="max-h-full w-auto object-contain"
                 />
               </div>
-              <div className="relative flex items-end justify-between gap-2 px-4 py-3 z-10">
+              <div className="relative z-10 flex items-end justify-between gap-2 px-4 py-3">
                 <div className="min-w-0">
                   <p className="text-[10px] font-medium tracking-wider text-gray-400 uppercase transition-colors duration-700 group-hover:text-gray-300">
                     {product.brand}
                   </p>
-                  <h4 className="text-xs font-semibold tracking-wide text-gray-900 uppercase truncate sm:text-sm transition-colors duration-700 group-hover:text-white">
+                  <h4 className="truncate text-xs font-semibold tracking-wide text-gray-900 uppercase transition-colors duration-700 group-hover:text-white sm:text-sm">
                     {product.name}
                   </h4>
                 </div>
-                <span className="shrink-0 text-xs font-medium text-gray-500 sm:text-sm transition-colors duration-700 group-hover:text-white">
+                <span className="shrink-0 text-xs font-medium text-gray-500 transition-colors duration-700 group-hover:text-white sm:text-sm">
                   {formatPrice(product.basePrice)}
                 </span>
               </div>
 
-              <div className="absolute inset-0 bg-black translate-y-full transition-transform duration-700 ease-in-out group-hover:translate-y-0" />
+              <div className="absolute inset-0 translate-y-full bg-black transition-transform duration-700 ease-in-out group-hover:translate-y-0" />
             </Link>
           ))}
         </div>

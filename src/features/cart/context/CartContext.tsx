@@ -1,119 +1,107 @@
 "use client";
 
 import {
-    createContext,
-    useContext,
-    useState,
-    useCallback,
-    useMemo,
-    useEffect,
-    ReactNode,
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useMemo,
+  useEffect,
+  ReactNode,
 } from "react";
 import { CartItem } from "@/features/products/types";
 
 interface CartContextValue {
-    items: CartItem[];
-    addItem: (item: Omit<CartItem, "cartId" | "quantity">) => void;
-    removeItem: (cartId: string) => void;
-    updateQuantity: (cartId: string, quantity: number) => void;
-    itemCount: number;
-    total: number;
+  items: CartItem[];
+  addItem: (item: Omit<CartItem, "cartId" | "quantity">) => void;
+  removeItem: (cartId: string) => void;
+  updateQuantity: (cartId: string, quantity: number) => void;
+  itemCount: number;
+  total: number;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
 
 export function CartProvider({ children }: { children: ReactNode }) {
-    const [items, setItems] = useState<CartItem[]>([]);
-    const [isMounted, setIsMounted] = useState(false);
+  const [items, setItems] = useState<CartItem[]>([]);
+  const [isMounted, setIsMounted] = useState(false);
 
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
-        setIsMounted(true);
-        try {
-            const storedCart = localStorage.getItem("mobileStore_cart");
-            if (storedCart) {
-                setItems(JSON.parse(storedCart));
-            }
-        } catch (error) {
-            console.error("Failed to load cart from local storage", error);
-        }
-    }, []);
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMounted(true);
+    try {
+      const storedCart = localStorage.getItem("mobileStore_cart");
+      if (storedCart) {
+        setItems(JSON.parse(storedCart));
+      }
+    } catch (error) {
+      console.error("Failed to load cart from local storage", error);
+    }
+  }, []);
 
-    useEffect(() => {
-        if (isMounted) {
-            localStorage.setItem("mobileStore_cart", JSON.stringify(items));
-        }
-    }, [items, isMounted]);
+  useEffect(() => {
+    if (isMounted) {
+      localStorage.setItem("mobileStore_cart", JSON.stringify(items));
+    }
+  }, [items, isMounted]);
 
-    const addItem = useCallback(
-        (newItem: Omit<CartItem, "cartId" | "quantity">) => {
-            setItems((prev) => {
-                const existing = prev.find(
-                    (item) =>
-                        item.productId === newItem.productId &&
-                        item.storage === newItem.storage &&
-                        item.color === newItem.color
-                );
+  const addItem = useCallback((newItem: Omit<CartItem, "cartId" | "quantity">) => {
+    setItems((prev) => {
+      const existing = prev.find(
+        (item) =>
+          item.productId === newItem.productId &&
+          item.storage === newItem.storage &&
+          item.color === newItem.color
+      );
 
-                if (existing) {
-                    return prev.map((item) =>
-                        item.cartId === existing.cartId
-                            ? { ...item, quantity: item.quantity + 1 }
-                            : item
-                    );
-                }
-
-                return [
-                    ...prev,
-                    {
-                        ...newItem,
-                        cartId: `${newItem.productId}-${newItem.storage}-${newItem.color}`,
-                        quantity: 1,
-                    },
-                ];
-            });
-        },
-        []
-    );
-
-    const removeItem = useCallback((cartId: string) => {
-        setItems((prev) => prev.filter((item) => item.cartId !== cartId));
-    }, []);
-
-    const updateQuantity = useCallback((cartId: string, quantity: number) => {
-        if (quantity <= 0) {
-            setItems((prev) => prev.filter((item) => item.cartId !== cartId));
-            return;
-        }
-        setItems((prev) =>
-            prev.map((item) =>
-                item.cartId === cartId ? { ...item, quantity } : item
-            )
+      if (existing) {
+        return prev.map((item) =>
+          item.cartId === existing.cartId ? { ...item, quantity: item.quantity + 1 } : item
         );
-    }, []);
+      }
 
-    const itemCount = useMemo(
-        () => items.reduce((sum, item) => sum + item.quantity, 0),
-        [items]
-    );
+      return [
+        ...prev,
+        {
+          ...newItem,
+          cartId: `${newItem.productId}-${newItem.storage}-${newItem.color}`,
+          quantity: 1,
+        },
+      ];
+    });
+  }, []);
 
-    const total = useMemo(
-        () => items.reduce((sum, item) => sum + item.price * item.quantity, 0),
-        [items]
-    );
+  const removeItem = useCallback((cartId: string) => {
+    setItems((prev) => prev.filter((item) => item.cartId !== cartId));
+  }, []);
 
-    const value = useMemo(
-        () => ({ items, addItem, removeItem, updateQuantity, itemCount, total }),
-        [items, addItem, removeItem, updateQuantity, itemCount, total]
-    );
+  const updateQuantity = useCallback((cartId: string, quantity: number) => {
+    if (quantity <= 0) {
+      setItems((prev) => prev.filter((item) => item.cartId !== cartId));
+      return;
+    }
+    setItems((prev) => prev.map((item) => (item.cartId === cartId ? { ...item, quantity } : item)));
+  }, []);
 
-    return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  const itemCount = useMemo(() => items.reduce((sum, item) => sum + item.quantity, 0), [items]);
+
+  const total = useMemo(
+    () => items.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    [items]
+  );
+
+  const value = useMemo(
+    () => ({ items, addItem, removeItem, updateQuantity, itemCount, total }),
+    [items, addItem, removeItem, updateQuantity, itemCount, total]
+  );
+
+  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 }
 
 export function useCart() {
-    const context = useContext(CartContext);
-    if (!context) {
-        throw new Error("useCart must be used within a CartProvider");
-    }
-    return context;
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
 }
