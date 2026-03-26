@@ -8,14 +8,7 @@ const nextConfig: NextConfig = {
   compiler: {
     removeConsole: isDevelopmentMode ? false : { exclude: ["error"] },
   },
-  // Le decimos a webpack que no aplaste el codigo en develop
-  // asi podemos leer bien las variables si algo rompe
-  webpack: (config) => {
-    if (isDevelopmentMode) {
-      config.optimization.minimize = false;
-    }
-    return config;
-  },
+
   images: {
     remotePatterns: [
       {
