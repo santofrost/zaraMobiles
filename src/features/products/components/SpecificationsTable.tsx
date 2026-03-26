@@ -30,7 +30,7 @@ export default function SpecificationsTable({
         <h2 className="mb-8 text-sm font-semibold tracking-widest text-gray-900 uppercase">
           {t("detail.specifications")}
         </h2>
-        <div className="border-t border-gray-200">
+        <dl className="border-t border-gray-200">
           {rows.map((row) => {
             const translationTarget = `specs.${row.key}` as keyof typeof t extends never ? never : TranslationKey;
 
@@ -39,16 +39,16 @@ export default function SpecificationsTable({
                 key={row.key}
                 className="flex flex-col gap-1 border-b border-gray-200 py-4 sm:flex-row sm:gap-8"
               >
-                <span className="shrink-0 w-48 text-xs font-medium tracking-wider text-gray-900 uppercase">
+                <dt className="shrink-0 w-48 text-xs font-medium tracking-wider text-gray-900 uppercase">
                   {t(translationTarget) !== translationTarget ? t(translationTarget) : row.key}
-                </span>
-                <span className="text-sm text-gray-600">
+                </dt>
+                <dd className="text-sm text-gray-600 m-0">
                   {row.value}
-                </span>
+                </dd>
               </div>
             );
           })}
-        </div>
+        </dl>
       </div>
     </section>
   );

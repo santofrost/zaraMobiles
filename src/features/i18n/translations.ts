@@ -4,6 +4,7 @@ export const translations = {
     es: {
         toolbar: {
             cart: "Carrito",
+            language: "Selector de idioma",
         },
         search: {
             placeholder: "Busca un smartphone...",
@@ -49,11 +50,14 @@ export const translations = {
             continue: "CONTINUAR COMPRANDO",
             pay: "PAGAR",
             remove: "Eliminar",
+            increase: "Añadir otro de",
+            decrease: "Quitar uno de",
         },
     },
     en: {
         toolbar: {
             cart: "Cart",
+            language: "Language selector",
         },
         search: {
             placeholder: "Search for a smartphone...",
@@ -99,6 +103,8 @@ export const translations = {
             continue: "CONTINUE SHOPPING",
             pay: "PAY",
             remove: "Remove",
+            increase: "Add another",
+            decrease: "Remove one from",
         },
     }
 } as const;

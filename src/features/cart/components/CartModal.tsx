@@ -22,9 +22,15 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
             <div
                 className="fixed inset-0 z-40"
                 onClick={onClose}
+                aria-hidden="true"
             />
 
-            <div className="absolute right-0 top-full z-50 w-80 border border-gray-200 bg-white shadow-lg sm:w-96">
+            <div 
+                className="absolute right-0 top-full z-50 w-80 border border-gray-200 bg-white shadow-lg sm:w-96"
+                role="dialog"
+                aria-modal="true"
+                aria-label={t("cart.title")}
+            >
                 {items.length === 0 ? (
                     <div className="p-6 text-center">
                         <p className="text-sm text-gray-400">{t("cart.empty")}</p>

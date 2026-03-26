@@ -19,7 +19,7 @@ describe('ColorSelector Component', () => {
     it('renders correctly with a selected index', () => {
         render(<ColorSelector options={mockOptions} selectedIndex={0} onSelect={() => { }} />);
         // Verify it assigns the selected class (which proves the ternary hits the true branch)
-        const buttons = screen.getAllByRole('button');
+        const buttons = screen.getAllByRole('radio');
         expect(buttons[0]).toHaveClass('ring-2');
     });
 
@@ -32,7 +32,7 @@ describe('ColorSelector Component', () => {
         const handleSelect = jest.fn();
         render(<ColorSelector options={mockOptions} selectedIndex={null} onSelect={handleSelect} />);
 
-        const buttons = screen.getAllByRole('button');
+        const buttons = screen.getAllByRole('radio');
         act(() => {
             buttons[0].click();
         });

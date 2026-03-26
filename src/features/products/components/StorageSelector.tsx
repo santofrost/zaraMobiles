@@ -16,15 +16,21 @@ export default function StorageSelector({
 
   return (
     <div className="flex flex-col gap-3">
-      <span className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase">
+      <span id="storage-label" className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase">
         {t("detail.storage")}
       </span>
-      <div className="flex gap-0">
+      <div 
+        className="flex gap-0"
+        role="radiogroup"
+        aria-labelledby="storage-label"
+      >
         {options.map((option, index) => (
           <button
             key={option.capacity}
+            role="radio"
+            aria-checked={index === selectedIndex}
             onClick={() => onSelect(index)}
-            className={`px-5 py-3 text-xs font-medium tracking-wide border transition-colors ${index === selectedIndex
+            className={`px-5 py-3 text-xs font-medium tracking-wide border transition-colors focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 focus-visible:z-10 relative ${index === selectedIndex
               ? "border-black bg-black text-white"
               : "border-gray-300 bg-white text-gray-700 hover:border-gray-500"
               }`}
