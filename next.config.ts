@@ -3,14 +3,13 @@ import type { NextConfig } from "next";
 const isDevelopmentMode = process.env.NEXT_PUBLIC_APP_ENV === "develop";
 
 const nextConfig: NextConfig = {
-  // Explicitly control React Compiler / SWC Minification globally
-  // Next.js normally defaults this to true on production builds only,
-  // but we mandate it per the environment variable.
+  // Quitamos los logs en PRODUCTION para que quede mas limpio
+  // pero si estamos en local los dejamos para debugear
   compiler: {
     removeConsole: isDevelopmentMode ? false : { exclude: ["error"] },
   },
-  // In development mode, we prefer unminified readable assets
-  // In production mode, we want heavily concatenated and minified assets
+  // Le decimos a webpack que no aplaste el codigo en develop
+  // asi podemos leer bien las variables si algo rompe
   webpack: (config) => {
     if (isDevelopmentMode) {
       config.optimization.minimize = false;
