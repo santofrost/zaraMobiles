@@ -16,17 +16,24 @@ export default function ColorSelector({
 
   return (
     <div className="flex flex-col gap-3">
-      <span className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase mt-4">
+      <span id="color-label" className="text-[10px] font-semibold tracking-widest text-gray-500 uppercase mt-4">
         {t("detail.color")}
       </span>
-      <div className="flex gap-3">
+      <div 
+        className="flex gap-3"
+        role="radiogroup"
+        aria-labelledby="color-label"
+      >
         {options.map((option, index) => (
           <button
             key={option.name}
+            role="radio"
+            aria-checked={index === selectedIndex}
             onClick={() => onSelect(index)}
             title={option.name}
-            className={`h-8 w-8 rounded-sm transition-all ${index === selectedIndex
-              ? "ring-2 ring-offset-2 ring-black"
+            aria-label={option.name}
+            className={`h-8 w-8 rounded-sm transition-all focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 ${index === selectedIndex
+              ? "ring-2 ring-offset-2 ring-black bg-black"
               : "hover:ring-1 hover:ring-offset-1 hover:ring-gray-400"
               }`}
             style={{ backgroundColor: option.hexCode }}

@@ -9,9 +9,10 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <Link href={`/product/${product.id}`}>
+    <Link href={`/product/${product.id}`} className="block">
       <article
         id={`product-card-${product.id}`}
+        aria-labelledby={`product-heading-${product.id}`}
         className="group relative flex flex-col border border-gray-200 bg-white overflow-hidden cursor-pointer"
       >
         <div className="relative flex items-center justify-center aspect-square overflow-hidden p-4 z-10">
@@ -29,7 +30,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             <p className="text-[10px] font-medium tracking-wider text-gray-400 uppercase transition-colors duration-700 group-hover:text-gray-300">
               {product.brand}
             </p>
-            <h2 className="text-xs font-semibold tracking-wide text-gray-900 uppercase truncate sm:text-sm transition-colors duration-700 group-hover:text-white">
+            <h2 id={`product-heading-${product.id}`} className="text-xs font-semibold tracking-wide text-gray-900 uppercase truncate sm:text-sm transition-colors duration-700 group-hover:text-white">
               {product.name}
             </h2>
           </div>

@@ -8,7 +8,7 @@ import { useLanguage } from "@/features/i18n/LanguageContext";
 
 export default function Toolbar() {
   const { itemCount } = useCart();
-  const { language, setLanguage } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
 
@@ -23,6 +23,9 @@ export default function Toolbar() {
           <button
             onClick={() => setIsLangOpen(!isLangOpen)}
             className="flex items-center gap-1 text-2xl hover:opacity-80 transition-opacity cursor-pointer"
+            aria-label={t("toolbar.language")}
+            aria-expanded={isLangOpen}
+            aria-haspopup="menu"
           >
             {language === "es" ? "🇪🇸" : "🇺🇸"}
           </button>
@@ -32,10 +35,12 @@ export default function Toolbar() {
               <div
                 className="fixed inset-0 z-40"
                 onClick={() => setIsLangOpen(false)}
+                aria-hidden="true"
               />
               <div className="absolute right-0 top-full pt-2 w-24 z-50">
-                <div className="flex flex-col bg-white border border-gray-100 shadow-xl rounded overflow-hidden">
+                <div role="menu" className="flex flex-col bg-white border border-gray-100 shadow-xl rounded overflow-hidden">
                   <button
+                    role="menuitem"
                     onClick={() => {
                       setLanguage("es");
                       setIsLangOpen(false);
@@ -45,6 +50,7 @@ export default function Toolbar() {
                     🇪🇸 ES
                   </button>
                   <button
+                    role="menuitem"
                     onClick={() => {
                       setLanguage("en");
                       setIsLangOpen(false);
@@ -63,6 +69,9 @@ export default function Toolbar() {
           <button
             onClick={() => setIsCartOpen(!isCartOpen)}
             className="flex items-center gap-1.5 text-black hover:opacity-80 transition-opacity cursor-pointer"
+            aria-haspopup="dialog"
+            aria-expanded={isCartOpen}
+            aria-label={t("cart.title")}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -71,10 +80,11 @@ export default function Toolbar() {
               strokeWidth={1.5}
               stroke="currentColor"
               className="h-5 w-5"
+              aria-hidden="true"
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
             </svg>
-            <span className="text-sm font-medium">{itemCount}</span>
+            <span className="text-sm font-medium" aria-hidden="true">{itemCount}</span>
           </button>
 
           <CartModal isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />

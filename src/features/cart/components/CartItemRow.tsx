@@ -42,17 +42,19 @@ export default function CartItemRow({ item, onRemove, onUpdateQuantity }: CartIt
                         <button
                             onClick={() => onUpdateQuantity(item.cartId, item.quantity - 1)}
                             className="flex h-8 w-8 items-center justify-center border border-gray-300 text-gray-600 hover:border-gray-500 transition-colors cursor-pointer"
+                            aria-label={`${t("cart.decrease")} ${item.name}`}
                         >
-                            −
+                            <span aria-hidden="true">−</span>
                         </button>
-                        <span className="text-sm font-semibold text-gray-900 w-6 text-center">
+                        <span className="text-sm font-semibold text-gray-900 w-6 text-center" aria-live="polite">
                             {item.quantity}
                         </span>
                         <button
                             onClick={() => onUpdateQuantity(item.cartId, item.quantity + 1)}
                             className="flex h-8 w-8 items-center justify-center border border-gray-300 text-gray-600 hover:border-gray-500 transition-colors cursor-pointer"
+                            aria-label={`${t("cart.increase")} ${item.name}`}
                         >
-                            +
+                            <span aria-hidden="true">+</span>
                         </button>
                     </div>
                 </div>
@@ -60,6 +62,7 @@ export default function CartItemRow({ item, onRemove, onUpdateQuantity }: CartIt
                 <button
                     onClick={() => onRemove(item.cartId)}
                     className="self-start text-xs text-red-400 hover:text-red-600 transition-colors underline"
+                    aria-label={`${t("cart.remove")} ${item.name}`}
                 >
                     {t("cart.remove")}
                 </button>
