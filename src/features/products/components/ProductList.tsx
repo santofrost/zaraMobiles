@@ -21,7 +21,7 @@ export default function ProductList({ products }: ProductListProps) {
     <ul className="grid grid-cols-1 px-4 pb-8 sm:grid-cols-2 sm:px-8 lg:grid-cols-5">
       {products.map((product, index) => (
         <li key={`${product.id}-${index}`}>
-          <ProductCard product={product} />
+          <ProductCard product={product} priority={index < 10} />
         </li>
       ))}
     </ul>
