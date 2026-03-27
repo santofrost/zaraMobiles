@@ -30,9 +30,9 @@ export default function SimilarProducts({ products }: SimilarProductsProps) {
                 <Image
                   src={product.imageUrl}
                   alt={`${product.brand} ${product.name}`}
-                  width={200}
-                  height={200}
-                  className="max-h-full w-auto object-contain"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 256px"
+                  className="object-contain"
                 />
               </div>
               <div className="relative z-10 flex items-end justify-between gap-2 px-4 py-3">
