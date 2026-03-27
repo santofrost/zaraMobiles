@@ -68,8 +68,8 @@ Gestión completa del desarrollo de nuestra aplicación:
 - [x] Maquetar pantalla de carrito
 - [x] Almacenar carrito en React Context
 - [x] Almacenar carrito en almacenamiento local
-- [ ] Creación de modos
-- [ ] Servir assets dependiendo del modo
+- [x] Creación de modos
+- [x] Servir assets dependiendo del modo
 - [x] Trabajar con datos de API
 - [x] Testing
 - [x] Accesibilidad
