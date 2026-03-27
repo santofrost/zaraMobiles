@@ -36,42 +36,44 @@ export default function Toolbar() {
             <span className="hidden text-sm font-medium md:block">{language.toUpperCase()}</span>
           </button>
 
-          {isLangOpen && (
-            <>
-              <div
-                className="fixed inset-0 z-40"
-                onClick={() => setIsLangOpen(false)}
-                aria-hidden="true"
-              />
-              <div className="absolute top-full right-0 z-50 w-24 pt-2">
-                <div
-                  role="menu"
-                  className="flex flex-col overflow-hidden rounded border border-gray-100 bg-white shadow-xl"
-                >
-                  <button
-                    role="menuitem"
-                    onClick={() => {
-                      setLanguage("es");
-                      setIsLangOpen(false);
-                    }}
-                    className={`flex items-center gap-2 px-4 py-3 text-sm transition-colors hover:bg-gray-50 ${language === "es" ? "bg-gray-50 font-bold" : ""}`}
-                  >
-                    🇪🇸 ES
-                  </button>
-                  <button
-                    role="menuitem"
-                    onClick={() => {
-                      setLanguage("en");
-                      setIsLangOpen(false);
-                    }}
-                    className={`flex items-center gap-2 px-4 py-3 text-sm transition-colors hover:bg-gray-50 ${language === "en" ? "bg-gray-50 font-bold" : ""}`}
-                  >
-                    🇺🇸 EN
-                  </button>
-                </div>
-              </div>
-            </>
-          )}
+          <div
+            className={`fixed inset-0 z-40 transition-opacity duration-300 ${
+              isLangOpen ? "opacity-100" : "pointer-events-none opacity-0"
+            }`}
+            onClick={() => setIsLangOpen(false)}
+            aria-hidden="true"
+          />
+          <div
+            className={`absolute top-full right-0 z-50 w-24 pt-2 transition-all duration-300 ${
+              isLangOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-2 opacity-0"
+            }`}
+          >
+            <div
+              role="menu"
+              className="flex flex-col overflow-hidden rounded border border-gray-100 bg-white shadow-xl"
+            >
+              <button
+                role="menuitem"
+                onClick={() => {
+                  setLanguage("es");
+                  setIsLangOpen(false);
+                }}
+                className={`flex items-center gap-2 px-4 py-3 text-sm transition-colors hover:bg-gray-50 ${language === "es" ? "bg-gray-50 font-bold" : ""}`}
+              >
+                🇪🇸 ES
+              </button>
+              <button
+                role="menuitem"
+                onClick={() => {
+                  setLanguage("en");
+                  setIsLangOpen(false);
+                }}
+                className={`flex items-center gap-2 px-4 py-3 text-sm transition-colors hover:bg-gray-50 ${language === "en" ? "bg-gray-50 font-bold" : ""}`}
+              >
+                🇺🇸 EN
+              </button>
+            </div>
+          </div>
         </div>
 
         <div className="relative">
