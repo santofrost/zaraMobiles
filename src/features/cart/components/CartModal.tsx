@@ -15,15 +15,24 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
   const { items, itemCount, total } = useCart();
   const { t } = useLanguage();
 
-  if (!isOpen) return null;
-
   return (
     <>
-      <div className="fixed inset-0 z-40" onClick={onClose} aria-hidden="true" />
-
+      {/* Backdrop */}
       <div
-        className={`absolute top-full right-0 z-50 w-80 border border-gray-200 bg-white shadow-lg transition-all duration-300 sm:w-96 ${isOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-4 opacity-0"
-          }`}
+        className={`fixed inset-0 z-40 bg-black/5 transition-opacity duration-300 ${
+          isOpen ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+        onClick={onClose}
+        aria-hidden="true"
+      />
+
+      {/* Modal */}
+      <div
+        className={`absolute top-full right-0 z-50 w-80 border border-gray-200 bg-white shadow-lg transition-all duration-300 sm:w-96 ${
+          isOpen
+            ? "translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-4 opacity-0"
+        }`}
         role="dialog"
         aria-modal="true"
         aria-label={t("cart.title")}
@@ -43,7 +52,13 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
                   className="flex gap-3 p-4 transition-colors hover:bg-gray-50"
                 >
                   <div className="relative h-16 w-16 shrink-0">
-                    <Image src={item.imageUrl} alt={item.name} fill className="object-contain" />
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.name}
+                      fill
+                      sizes="64px"
+                      className="object-contain"
+                    />
                   </div>
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-xs font-semibold text-gray-900 uppercase">
