@@ -25,12 +25,15 @@ export default function Toolbar() {
         <div className="relative flex items-center">
           <button
             onClick={() => setIsLangOpen(!isLangOpen)}
-            className="flex cursor-pointer items-center gap-1 text-2xl transition-opacity hover:opacity-80"
+            className="flex cursor-pointer items-center transition-opacity hover:opacity-80"
             aria-label={t("toolbar.language")}
             aria-expanded={isLangOpen}
             aria-haspopup="menu"
           >
-            {language === "es" ? "🇪🇸" : "🇺🇸"}
+            <span className="flex items-center text-2xl leading-none md:hidden">
+              {language === "es" ? "🇪🇸" : "🇺🇸"}
+            </span>
+            <span className="hidden text-sm font-medium md:block">{language.toUpperCase()}</span>
           </button>
 
           {isLangOpen && (
