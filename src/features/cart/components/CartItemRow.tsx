@@ -25,6 +25,7 @@ export default function CartItemRow({ item, onRemove, onUpdateQuantity }: CartIt
           src={item.imageUrl}
           alt={`${item.brand} ${item.name}`}
           fill
+          sizes="160px"
           className="object-contain"
         />
       </Link>

@@ -5,9 +5,10 @@ import { formatPrice } from "@/utils/formatPrice";
 
 interface ProductCardProps {
   product: Product;
+  priority?: boolean;
 }
 
-export default function ProductCard({ product }: ProductCardProps) {
+export default function ProductCard({ product, priority = false }: ProductCardProps) {
   return (
     <Link href={`/product/${product.id}`} className="block">
       <article
@@ -18,10 +19,11 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="relative z-10 flex aspect-square items-center justify-center overflow-hidden p-4">
           <Image
             src={product.imageUrl}
-            alt={`${product.brand} ${product.name}`}
-            width={280}
-            height={280}
-            className="max-h-full w-auto object-contain"
+            alt={product.name}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={priority}
+            className="object-contain"
           />
         </div>
 

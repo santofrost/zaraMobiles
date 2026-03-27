@@ -22,7 +22,8 @@ export default function CartModal({ isOpen, onClose }: CartModalProps) {
       <div className="fixed inset-0 z-40" onClick={onClose} aria-hidden="true" />
 
       <div
-        className="absolute top-full right-0 z-50 w-80 border border-gray-200 bg-white shadow-lg sm:w-96"
+        className={`absolute top-full right-0 z-50 w-80 border border-gray-200 bg-white shadow-lg transition-all duration-300 sm:w-96 ${isOpen ? "translate-y-0 opacity-100" : "pointer-events-none -translate-y-4 opacity-0"
+          }`}
         role="dialog"
         aria-modal="true"
         aria-label={t("cart.title")}
